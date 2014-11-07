@@ -3,7 +3,7 @@ html
   head
     title Widgets for Awesome New Tab Page
     link(rel="chrome-webstore-item",href="https://chrome.google.com/webstore/detail/mgmiemnjjchgkmgbeljfocdjjnpjnmcg")
-    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    //- script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
 
     link(rel="stylesheet", href="/todc-bootstrap/css/bootstrap.min.css")
     link(rel="canonical", href="https://antp.co/")
@@ -71,11 +71,11 @@ html
       ga('create', 'UA-26076327-8', 'antp.co');
       ga('send', 'pageview');
 
-      $( document ).ready(function() {
-        $(".antp-download").click(function(e) {
-          if (chrome && chrome.webstore.install) {
-            chrome.webstore.install()
-            e.preventDefault();
-          }
-        });
-      });
+      //- $( document ).ready(function() {
+      //-   $(".antp-download").click(function(e) {
+      //-     if (chrome && chrome.webstore.install) {
+      //-       chrome.webstore.install()
+      //-       e.preventDefault();
+      //-     }
+      //-   });
+      //- });
