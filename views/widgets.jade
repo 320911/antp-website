@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    title #{title ? title + " - " : ""}Awesome New Tab Page Widgets
+    link(rel="chrome-webstore-item",href="https://chrome.google.com/webstore/detail/mgmiemnjjchgkmgbeljfocdjjnpjnmcg")
+    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+
+    link(rel="stylesheet", href="/todc-bootstrap/css/bootstrap.min.css")
+
+    style.
+      /* Align */
+      .ar { text-align:  right; }
+      .al { text-align:   left; }
+      .ac { text-align: center; }
+
+      /* Space */
+      .mt-25 { margin-top: 25px; }
+      .mb-25 { margin-bottom: 25px; }
+
+      .cws-icon { width: 64px; height: 64px; }
+      .muted { opacity: .6 }
+  body
+    mixin widget(widget)
+      .col-md-3.popover-this(data-toggle="popover", title=widget.name, data-content=widget.description, data-placement="bottom")
+        .row-fluid
+          .col-md-12
+            div
+              strong #{widget.name}
+            div.muted(title="#{widget.from}")
+              small by #{widget.from}
+        .row-fluid
+          .col-md-4
+            img.cws-icon(src="/widget-icons/#{widget.id}.png")
+          .col-md-8.ac.mt-10
+            a.btn.btn-default(target="_blank", href="https://chrome.google.com/webstore/detail/#{widget.id}", rel="nofollow")
+              i.icon-download-alt.icon-white
+              |  Install
+
+    .container
+      .row-fluid
+        .col-md-8.mb-25
+          h3 Awesome New Tab Page Widgets
+          p After installing a widget from the Chrome Web Store, you can find them in the widgets window; that's the white icon with 2 rectangles in the top left of Awesome New Tab Page.
+        .col-md-4.mb-25
+          h3 Awesome HQ
+          p Wish Awesome New Tab Page worked on your phone or in other browsers?
+          p.text-center
+            a.btn.btn-default.btn-lg(href="https://www.awesomehq.com/") Check out Awesome HQ
+
+      .widgets#dashboard-widgets
+        - for (var row = 0; row < Math.ceil(widgets.length / 4); row++) {
+          .row.mb-25
+            - for (var col = 0; col < 4; col++) {
+              if (widgets[(row*4)+col])
+                mixin widget(widgets[(row*4)+col])
+            - }
+        - }
+
+      .mb-25.muted
+        h4 Developer with a widget to add, remove, or modify?
+        p See https://github.com/NewTabPage/antp-website
+
+
+    script(type='text/javascript').
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-26076327-8', 'antp.co');
+      ga('send', 'pageview');
+
+      $( document ).ready(function() {
+        $(".antp-download").click(function(e) {
+          if (chrome && chrome.webstore.install) {
+            chrome.webstore.install()
+            e.preventDefault();
+          }
+        });
+      });
