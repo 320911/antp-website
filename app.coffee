@@ -10,9 +10,9 @@ app.set "view engine", "jade"
 
 # Index
 app.get "/", (req, res) ->
+  res.set "Cache-Control", "public, max-age=60"
   res.render "widgets",
     widgets: require("./widgets.coffee").widgets()
-    # widgets: fisherYates(dev_widgets)
 
 # Redirect all other pages to index
 app.use (req, res) ->
